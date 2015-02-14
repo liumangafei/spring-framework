@@ -182,7 +182,7 @@ public abstract class WebApplicationContextUtils {
 			ConfigurableListableBeanFactory bf, ServletContext servletContext, ServletConfig servletConfig) {
 
 		if (servletContext != null && !bf.containsBean(WebApplicationContext.SERVLET_CONTEXT_BEAN_NAME)) {
-			bf.registerSingleton(WebApplicationContext.SERVLET_CONTEXT_BEAN_NAME, servletContext);
+			bf.registerSingleton(WebApplicationContext.SERVLET_CONTEXT_BEAN_NAME, servletContext); //
 		}
 
 		if (servletConfig != null && !bf.containsBean(ConfigurableWebApplicationContext.SERVLET_CONFIG_BEAN_NAME)) {

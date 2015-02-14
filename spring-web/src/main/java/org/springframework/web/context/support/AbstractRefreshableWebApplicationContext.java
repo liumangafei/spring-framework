@@ -161,8 +161,8 @@ public abstract class AbstractRefreshableWebApplicationContext extends AbstractR
 		beanFactory.ignoreDependencyInterface(ServletContextAware.class);
 		beanFactory.ignoreDependencyInterface(ServletConfigAware.class);
 
-		WebApplicationContextUtils.registerWebApplicationScopes(beanFactory, this.servletContext);
-		WebApplicationContextUtils.registerEnvironmentBeans(beanFactory, this.servletContext, this.servletConfig);
+		WebApplicationContextUtils.registerWebApplicationScopes(beanFactory, this.servletContext); // 注册WebApplication范围
+		WebApplicationContextUtils.registerEnvironmentBeans(beanFactory, this.servletContext, this.servletConfig); // 注册环境相关的beans
 	}
 
 	/**

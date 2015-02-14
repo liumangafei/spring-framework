@@ -194,7 +194,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 	 */
 	public void setSerializationId(String serializationId) {
 		if (serializationId != null) {
-			serializableFactories.put(serializationId, new WeakReference<DefaultListableBeanFactory>(this));
+			serializableFactories.put(serializationId, new WeakReference<DefaultListableBeanFactory>(this)); // 以serializationId为key、弱引用this为value 放入serializableFactories的map中
 		}
 		else if (this.serializationId != null) {
 			serializableFactories.remove(this.serializationId);

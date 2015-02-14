@@ -63,11 +63,9 @@ import org.springframework.context.ApplicationContextException;
  */
 public abstract class AbstractRefreshableApplicationContext extends AbstractApplicationContext {
 
-    //允许bean定义重写
-	private Boolean allowBeanDefinitionOverriding;
+	private Boolean allowBeanDefinitionOverriding; // 允许bean定义重写
 
-    //允许循环引用
-	private Boolean allowCircularReferences;
+	private Boolean allowCircularReferences; // 允许循环引用
 
 	/** Bean factory for this context */
 	private DefaultListableBeanFactory beanFactory;
@@ -117,20 +115,18 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 * This implementation performs an actual refresh of this context's underlying
 	 * bean factory, shutting down the previous bean factory (if any) and
 	 * initializing a fresh bean factory for the next phase of the context's lifecycle.
-     *
-     * 刷新beanFactory
 	 */
 	@Override
-	protected final void refreshBeanFactory() throws BeansException {
+	protected final void refreshBeanFactory() throws BeansException { // 刷新beanFactory
 		if (hasBeanFactory()) {
 			destroyBeans(); //对beanFactory中的单例进行销毁
 			closeBeanFactory(); //清空beanFactory
 		}
 		try {
-			DefaultListableBeanFactory beanFactory = createBeanFactory(); //创建一个新的beanFactory
+			DefaultListableBeanFactory beanFactory = createBeanFactory(); //创建一个新的DefaultListableBeanFactory
 			beanFactory.setSerializationId(getId()); //设置beanFactory的serializationId为当前类的id
 			customizeBeanFactory(beanFactory); //自定义beanFactory
-			loadBeanDefinitions(beanFactory); //加载beanDefinitions TODO:需要跟踪
+			loadBeanDefinitions(beanFactory); //加载beanDefinitions
 			synchronized (this.beanFactoryMonitor) {
 				this.beanFactory = beanFactory;
 			}
