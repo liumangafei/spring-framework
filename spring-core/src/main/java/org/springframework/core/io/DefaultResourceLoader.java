@@ -88,10 +88,10 @@ public class DefaultResourceLoader implements ResourceLoader {
 	@Override
 	public Resource getResource(String location) {
 		Assert.notNull(location, "Location must not be null");
-		if (location.startsWith("/")) {
+		if (location.startsWith("/")) { // 判断是否是"/"开头的location
 			return getResourceByPath(location);
 		}
-		else if (location.startsWith(CLASSPATH_URL_PREFIX)) {
+		else if (location.startsWith(CLASSPATH_URL_PREFIX)) { // 判断是否是"classpath:"开头的location
 			return new ClassPathResource(location.substring(CLASSPATH_URL_PREFIX.length()), getClassLoader());
 		}
 		else {

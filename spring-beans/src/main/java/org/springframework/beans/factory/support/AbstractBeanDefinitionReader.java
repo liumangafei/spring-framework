@@ -107,6 +107,11 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 		return this.registry;
 	}
 
+	@Override
+	public ResourceLoader getResourceLoader() {
+		return this.resourceLoader;
+	}
+
 	/**
 	 * Set the ResourceLoader to use for resource locations.
 	 * If specifying a ResourcePatternResolver, the bean definition reader
@@ -123,8 +128,8 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 	}
 
 	@Override
-	public ResourceLoader getResourceLoader() {
-		return this.resourceLoader;
+	public ClassLoader getBeanClassLoader() {
+		return this.beanClassLoader;
 	}
 
 	/**
@@ -139,8 +144,8 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 	}
 
 	@Override
-	public ClassLoader getBeanClassLoader() {
-		return this.beanClassLoader;
+	public Environment getEnvironment() {
+		return this.environment;
 	}
 
 	/**
@@ -153,8 +158,8 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 	}
 
 	@Override
-	public Environment getEnvironment() {
-		return this.environment;
+	public BeanNameGenerator getBeanNameGenerator() {
+		return this.beanNameGenerator;
 	}
 
 	/**
@@ -165,12 +170,6 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 	public void setBeanNameGenerator(BeanNameGenerator beanNameGenerator) {
 		this.beanNameGenerator = (beanNameGenerator != null ? beanNameGenerator : new DefaultBeanNameGenerator());
 	}
-
-	@Override
-	public BeanNameGenerator getBeanNameGenerator() {
-		return this.beanNameGenerator;
-	}
-
 
 	@Override
 	public int loadBeanDefinitions(Resource... resources) throws BeanDefinitionStoreException {

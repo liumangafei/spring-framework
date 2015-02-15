@@ -71,15 +71,13 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	/**
 	 * Set the config locations for this application context.
 	 * <p>If not set, the implementation may use a default as appropriate.
-     *
-     * 设置configLocations
 	 */
 	public void setConfigLocations(String... locations) {
 		if (locations != null) {
 			Assert.noNullElements(locations, "Config locations must not be null");
 			this.configLocations = new String[locations.length];
 			for (int i = 0; i < locations.length; i++) {
-				this.configLocations[i] = resolvePath(locations[i]).trim(); //TODO:需要深入跟踪
+				this.configLocations[i] = resolvePath(locations[i]).trim(); //分解path TODO:需要深入跟踪
 			}
 		}
 		else {
