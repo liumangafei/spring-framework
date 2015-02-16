@@ -267,7 +267,7 @@ public class ClassPathScanningCandidateComponentProvider implements EnvironmentC
 		try {
 			String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +
 					resolveBasePackage(basePackage) + "/" + this.resourcePattern;
-			Resource[] resources = this.resourcePatternResolver.getResources(packageSearchPath);
+			Resource[] resources = this.resourcePatternResolver.getResources(packageSearchPath); // 根据packageSearchPath路径获取对应的Resource
 			boolean traceEnabled = logger.isTraceEnabled();
 			boolean debugEnabled = logger.isDebugEnabled();
 			for (Resource resource : resources) {

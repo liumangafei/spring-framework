@@ -91,7 +91,7 @@ public class XmlWebApplicationContext extends AbstractRefreshableWebApplicationC
 		// Allow a subclass to provide custom initialization of the reader,
 		// then proceed with actually loading the bean definitions.
 		initBeanDefinitionReader(beanDefinitionReader);
-		loadBeanDefinitions(beanDefinitionReader); // 解析xml中对应的BeanDefinitions
+		loadBeanDefinitions(beanDefinitionReader); // 利用beanDefinitionReader解析xml中对应的BeanDefinitions
 	}
 
 	/**
