@@ -142,7 +142,7 @@ public abstract class WebApplicationContextUtils {
 	 * @param sc the ServletContext that we're running within
 	 */
 	public static void registerWebApplicationScopes(ConfigurableListableBeanFactory beanFactory, ServletContext sc) {
-		beanFactory.registerScope(WebApplicationContext.SCOPE_REQUEST, new RequestScope());
+		beanFactory.registerScope(WebApplicationContext.SCOPE_REQUEST, new RequestScope()); // 注册作用域
 		beanFactory.registerScope(WebApplicationContext.SCOPE_SESSION, new SessionScope(false));
 		beanFactory.registerScope(WebApplicationContext.SCOPE_GLOBAL_SESSION, new SessionScope(true));
 		if (sc != null) {
@@ -152,7 +152,7 @@ public abstract class WebApplicationContextUtils {
 			sc.setAttribute(ServletContextScope.class.getName(), appScope);
 		}
 
-		beanFactory.registerResolvableDependency(ServletRequest.class, new RequestObjectFactory());
+		beanFactory.registerResolvableDependency(ServletRequest.class, new RequestObjectFactory()); // 设置了几个自动装配的特殊规则
 		beanFactory.registerResolvableDependency(ServletResponse.class, new ResponseObjectFactory());
 		beanFactory.registerResolvableDependency(HttpSession.class, new SessionObjectFactory());
 		beanFactory.registerResolvableDependency(WebRequest.class, new WebRequestObjectFactory());

@@ -56,7 +56,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	public static final String NAME_ATTRIBUTE = "name";
 
 	@Override
-	public final BeanDefinition parse(Element element, ParserContext parserContext) {
+	public final BeanDefinition parse(Element element, ParserContext parserContext) { // 解析Element并注册BeanDefinition等一些操作
 		AbstractBeanDefinition definition = parseInternal(element, parserContext);
 		if (definition != null && !parserContext.isNested()) {
 			try {
@@ -69,10 +69,10 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 				String[] aliases = new String[0];
 				String name = element.getAttribute(NAME_ATTRIBUTE);
 				if (StringUtils.hasLength(name)) {
-					aliases = StringUtils.trimArrayElements(StringUtils.commaDelimitedListToStringArray(name));
+					aliases = StringUtils.trimArrayElements(StringUtils.commaDelimitedListToStringArray(name)); // 别名属性字段转换为字符串数组
 				}
 				BeanDefinitionHolder holder = new BeanDefinitionHolder(definition, id, aliases);
-				registerBeanDefinition(holder, parserContext.getRegistry());
+				registerBeanDefinition(holder, parserContext.getRegistry()); // 注册BeanDefinition到BeanDefinitionMap中
 				if (shouldFireEvents()) {
 					BeanComponentDefinition componentDefinition = new BeanComponentDefinition(holder);
 					postProcessComponentDefinition(componentDefinition);

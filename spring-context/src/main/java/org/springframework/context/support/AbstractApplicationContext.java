@@ -456,7 +456,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
-				postProcessBeanFactory(beanFactory);
+				postProcessBeanFactory(beanFactory); // 设置BeanFactory相关参数、注册作用域
 
 				// Invoke factory processors registered as beans in the context.
 				invokeBeanFactoryPostProcessors(beanFactory);
@@ -549,13 +549,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void prepareBeanFactory(ConfigurableListableBeanFactory beanFactory) {
 		// Tell the internal bean factory to use the context's class loader etc.
-		beanFactory.setBeanClassLoader(getClassLoader()); // 设置Bean的ClassLoader
+		beanFactory.setBeanClassLoader(getClassLoader()); // 设置beanFactory的classLoader为当前context的classLoader
 		beanFactory.setBeanExpressionResolver(new StandardBeanExpressionResolver(beanFactory.getBeanClassLoader())); // 设置Bean的表达式解析器 - 标准的bean表达式解析器
 		beanFactory.addPropertyEditorRegistrar(new ResourceEditorRegistrar(this, getEnvironment())); // 设置属性编辑器 - 资源编辑器
 
 		// Configure the bean factory with context callbacks.
-		beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this)); // 增加bean前后逻辑处理器
-		beanFactory.ignoreDependencyInterface(ResourceLoaderAware.class); // 忽略依赖的接口
+		beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this)); // 添加了一个处理aware相关接口的beanPostProcessor扩展
+		beanFactory.ignoreDependencyInterface(ResourceLoaderAware.class); // 设置了几个忽略自动装配的接口，默认只有BeanFactoryAware被忽略，其他的都要自行设置，这里设置了ResourceLoaderAware、ApplicationEventPublisherAware、MessageSourceAware、ApplicationContextAware、EnvironmentAware
 		beanFactory.ignoreDependencyInterface(ApplicationEventPublisherAware.class);
 		beanFactory.ignoreDependencyInterface(MessageSourceAware.class);
 		beanFactory.ignoreDependencyInterface(ApplicationContextAware.class);
@@ -563,7 +563,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// BeanFactory interface not registered as resolvable type in a plain factory.
 		// MessageSource registered (and found for autowiring) as a bean.
-		beanFactory.registerResolvableDependency(BeanFactory.class, beanFactory); // 注册可处理的依赖
+		beanFactory.registerResolvableDependency(BeanFactory.class, beanFactory); // 设置了几个自动装配的特殊规则
 		beanFactory.registerResolvableDependency(ResourceLoader.class, this);
 		beanFactory.registerResolvableDependency(ApplicationEventPublisher.class, this);
 		beanFactory.registerResolvableDependency(ApplicationContext.class, this);
