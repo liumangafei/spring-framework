@@ -350,7 +350,7 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 	 * @param classLoader the ClassLoader to search (including its ancestors)
 	 * @param result the set of resources to add jar roots to
 	 */
-	protected void addAllClassLoaderJarRoots(ClassLoader classLoader, Set<Resource> result) {
+	protected void addAllClassLoaderJarRoots(ClassLoader classLoader, Set<Resource> result) { // 加载jar包中的Resource文件
 		if (classLoader instanceof URLClassLoader) {
 			try {
 				for (URL url : ((URLClassLoader) classLoader).getURLs()) {
@@ -407,10 +407,10 @@ public class PathMatchingResourcePatternResolver implements ResourcePatternResol
 		String subPattern = locationPattern.substring(rootDirPath.length()); // 子部分路径
 		Resource[] rootDirResources = getResources(rootDirPath);
 		Set<Resource> result = new LinkedHashSet<Resource>(16);
-		for (Resource rootDirResource : rootDirResources) {
-			rootDirResource = resolveRootDirResource(rootDirResource); // TODO：看不懂
+		for (Resource rootDirResource : rootDirResources) { // 循环匹配Resource与
+			rootDirResource = resolveRootDirResource(rootDirResource); // 处理OSGi "bundleresource:" / "bundleentry:"开头的URL TODO：看不懂
 			if (rootDirResource.getURL().getProtocol().startsWith(ResourceUtils.URL_PROTOCOL_VFS)) { // 判断是否是vfs文件（VFS的作用就是采用标准的Unix系统调用读写位于不同物理介质上的不同文件系统）
-				result.addAll(VfsResourceMatchingDelegate.findMatchingResources(rootDirResource, subPattern, getPathMatcher()));
+				result.addAll(VfsResourceMatchingDelegate.findMatchingResources(rootDirResource, subPattern, getPathMatcher())); // vfs文件匹配获取Resource文件 TODO： 看不懂
 			}
 			else if (isJarResource(rootDirResource)) { // 判断是否是jar包文件
 				result.addAll(doFindPathMatchingJarResources(rootDirResource, subPattern));
