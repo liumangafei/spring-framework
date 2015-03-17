@@ -114,11 +114,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 	private NamespaceHandlerResolver namespaceHandlerResolver;
 
-	private DocumentLoader documentLoader = new DefaultDocumentLoader();
+	private DocumentLoader documentLoader = new DefaultDocumentLoader(); // 设置DocumentLoader为DefaultDocumentLoader
 
 	private EntityResolver entityResolver;
 
-	private ErrorHandler errorHandler = new SimpleSaxErrorHandler(logger);
+	private ErrorHandler errorHandler = new SimpleSaxErrorHandler(logger); // 设置ErrorHandler为SimpleSaxErrorHandler
 
 	private final XmlValidationModeDetector validationModeDetector = new XmlValidationModeDetector();
 
@@ -301,7 +301,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	@Override
 	public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {
-		return loadBeanDefinitions(new EncodedResource(resource));
+		return loadBeanDefinitions(new EncodedResource(resource)); // 把Resource转换为EncodedResource，以便
 	}
 
 	/**
@@ -504,11 +504,11 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	@SuppressWarnings("deprecation")
 	public int registerBeanDefinitions(Document doc, Resource resource) throws BeanDefinitionStoreException {
-		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader();
-		documentReader.setEnvironment(getEnvironment());
-		int countBefore = getRegistry().getBeanDefinitionCount();
-		documentReader.registerBeanDefinitions(doc, createReaderContext(resource));
-		return getRegistry().getBeanDefinitionCount() - countBefore;
+		BeanDefinitionDocumentReader documentReader = createBeanDefinitionDocumentReader(); // 创建DefaultBeanDefinitionDocumentReader
+		documentReader.setEnvironment(getEnvironment()); // 设置环境
+		int countBefore = getRegistry().getBeanDefinitionCount(); // 获取当前BeanDefinition的数量
+		documentReader.registerBeanDefinitions(doc, createReaderContext(resource)); // 注册BeanDefinition
+		return getRegistry().getBeanDefinitionCount() - countBefore; // 返回成功注册的BeanDefinition的数量
 	}
 
 	/**

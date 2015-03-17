@@ -122,7 +122,7 @@ public class XmlWebApplicationContext extends AbstractRefreshableWebApplicationC
 		String[] configLocations = getConfigLocations();
 		if (configLocations != null) {
 			for (String configLocation : configLocations) {
-				reader.loadBeanDefinitions(configLocation);
+				reader.loadBeanDefinitions(configLocation); // XmlBeanDefinitionReader加载configLocation中所定义的BeanDefinition TODO：需要深入跟踪
 			}
 		}
 	}

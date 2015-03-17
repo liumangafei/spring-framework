@@ -456,16 +456,16 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
-				postProcessBeanFactory(beanFactory); // 设置BeanFactory相关参数、注册作用域
+				postProcessBeanFactory(beanFactory); //
 
 				// Invoke factory processors registered as beans in the context.
-				invokeBeanFactoryPostProcessors(beanFactory);
+				invokeBeanFactoryPostProcessors(beanFactory); // 调用BeanFactoryPostProcessors
 
 				// Register bean processors that intercept bean creation.
-				registerBeanPostProcessors(beanFactory);
+				registerBeanPostProcessors(beanFactory); // 注册BeanPostProcessor
 
 				// Initialize message source for this context.
-				initMessageSource();
+				initMessageSource(); // 初始化MessageSource
 
 				// Initialize event multicaster for this context.
 				initApplicationEventMulticaster();
@@ -474,10 +474,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				onRefresh();
 
 				// Check for listener beans and register them.
-				registerListeners();
+				registerListeners(); // 注册监听器
 
 				// Instantiate all remaining (non-lazy-init) singletons.
-				finishBeanFactoryInitialization(beanFactory);
+				finishBeanFactoryInitialization(beanFactory); //
 
 				// Last step: publish corresponding event.
 				finishRefresh();
@@ -515,7 +515,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// Validate that all properties marked as required are resolvable
 		// see ConfigurablePropertyResolver#setRequiredProperties
-		getEnvironment().validateRequiredProperties(); // TODO:没有看懂该方法想验证什么
+		getEnvironment().validateRequiredProperties(); // 判断有的properties都不为null
 	}
 
 	/**
@@ -754,7 +754,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.freezeConfiguration();
 
 		// Instantiate all remaining (non-lazy-init) singletons.
-		beanFactory.preInstantiateSingletons();
+		beanFactory.preInstantiateSingletons(); //
 	}
 
 	/**
