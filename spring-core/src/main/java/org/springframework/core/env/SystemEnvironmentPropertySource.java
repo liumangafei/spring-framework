@@ -87,7 +87,7 @@ public class SystemEnvironmentPropertySource extends MapPropertySource {
 	 */
 	@Override
 	public Object getProperty(String name) {
-		String actualName = resolvePropertyName(name);
+		String actualName = resolvePropertyName(name); // 获取name在source等效的key
 		if (logger.isDebugEnabled() && !name.equals(actualName)) {
 			logger.debug(String.format("PropertySource [%s] does not contain '%s', but found equivalent '%s'",
 					getName(), name, actualName));
@@ -100,7 +100,7 @@ public class SystemEnvironmentPropertySource extends MapPropertySource {
 	 * any underscore / uppercase variation thereof. Return the resolved name if one is
 	 * found or otherwise the original name. Never returns {@code null}.
 	 */
-	private String resolvePropertyName(String name) {
+	private String resolvePropertyName(String name) { // 尝试匹配source中与name等效的key，并返回该key
 		Assert.notNull(name, "Property name must not be null");
 		if (containsKey(name)) {
 			return name;
